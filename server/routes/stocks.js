@@ -4,3 +4,9 @@ import getStocks from '../controllers/get.stocks.js'
 // import puStocks from '../controllers/put.stock.js'
 // import deletStocks from '../controllers/delete.stock.js'
 const router = Router()
+router.get('/stocks', getStocks)
+// router.post('/todo', postTodo)
+// router.put('/todo/:todoId', putTodo)
+// router.delete('/todo/:todoId', deleteTodo)
+ 
+export default router
