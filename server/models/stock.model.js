@@ -3,7 +3,7 @@ import path from 'path'
 import { promisify } from 'util'
 const readFile = promisify(fs.readFile)
 const writeFile = promisify(fs.writeFile)
-const stocksFile = path.join(__dirname, '../data/stocks.json')
+const stocksFile = 'server/data/stocks.json'
 
 export class Stock {
   /** @type {Number} */
@@ -21,6 +21,22 @@ export class Stock {
    * @returns {Promise<Stock[]>}
    */
   static async getAll() {
-    return await JSON.parse(readFile(stocksFile, 'utf8'))
+    return await readFile(stocksFile, 'utf8').then((data) => JSON.parse(data))
   }
+
+  static async get(id) {
+    const data = await readFile(stocksFile, 'utf8').then((data) =>
+      JSON.parse(data)
+    )
+    const stockFound = data.find((stock) => stock.id === parseInt(id))
+    if (stockFound) {
+      return stockFound
+    } else {
+      throw Error('Could not find any stocks with this ID')
+    }
+  }
+
+  static async add(name, shares, value, result) {}
+  static async remove(id) {}
+  static async edit(id, name, shares, value, result) {}
 }

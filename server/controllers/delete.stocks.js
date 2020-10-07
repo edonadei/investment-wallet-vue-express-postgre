@@ -1,6 +1,7 @@
-export default function gdeleteStocks(req, res) {
-    // NOTE: remove the "res.status(501).send({ message: 'not implemented' }})"
-    //       to make it work
-    res.status(501).send({ message: 'not implemented' })
+export default function deleteStocks(req, res) {
+  try {
+    Stock.getAll().then((values) => res.status(200).json(values))
+  } catch (err) {
+    res.status(400).send({ message: 'error: ' + err })
   }
-  
+}
